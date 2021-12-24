@@ -5,11 +5,11 @@ VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrmWebApi", "CrmWebApi\CrmWebApi.csproj", "{277760EC-9390-4C00-B983-479530D4BA23}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{DD0CEECA-E1A7-4C80-84F0-7D3720781771}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrmWebApi.Domain", "CrmWebApi.Domain", "{DD0CEECA-E1A7-4C80-84F0-7D3720781771}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrmWebApi.Domain.Core", "CrmWebApi.Domain.Core\CrmWebApi.Domain.Core.csproj", "{7591018F-C1BF-473E-A4CB-9749E16F083F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrmWebApi.Domain.Core", "CrmWebApi.Domain.Core\CrmWebApi.Domain.Core.csproj", "{7591018F-C1BF-473E-A4CB-9749E16F083F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrmWebApi.Domain.DatabaseContext", "CrmWebApi.Domain.DatabaseContext\CrmWebApi.Domain.DatabaseContext.csproj", "{4CCBEFE5-44F9-4810-8287-78CFA541209D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrmWebApi.Domain.DatabaseContext", "CrmWebApi.Domain.DatabaseContext\CrmWebApi.Domain.DatabaseContext.csproj", "{4CCBEFE5-44F9-4810-8287-78CFA541209D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

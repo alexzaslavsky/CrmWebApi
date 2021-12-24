@@ -12,6 +12,7 @@ namespace CrmWebApi.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly DatabaseContext _databaseContext;
+
         public ProductsController(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
