@@ -8,8 +8,6 @@ namespace CrmWebApi.Domain.DatabaseContext
     {
         public DbSet<Product> Products { get; set; }
 
-        public DatabaseContext() {}
-
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
