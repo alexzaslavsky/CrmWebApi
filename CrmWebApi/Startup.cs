@@ -1,6 +1,6 @@
 using CrmWebApi.Domain.DatabaseContext;
 using CrmWebApi.Interfaces;
-using CrmWebApi.Services;
+using CrmWebApi.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,7 +33,7 @@ namespace CrmWebApi
         {
             string connection = Configuration.GetConnectionString(Constants.ConnectionStringKey);
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
-            services.AddControllers().AddJsonOptions(json => json.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            services.AddControllers();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddSwaggerGen(c =>
             {

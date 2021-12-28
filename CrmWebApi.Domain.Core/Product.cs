@@ -1,4 +1,6 @@
-﻿namespace CrmWebApi.Domain.Core
+﻿using System.Text.Json.Serialization;
+
+namespace CrmWebApi.Domain.Core
 {
     public class Product
     {
@@ -14,6 +16,7 @@
 
         public int? CategoryId { get; set; }
 
+        [JsonIgnore]
         public virtual ProductCategory Category { get; set; }
     }
 }

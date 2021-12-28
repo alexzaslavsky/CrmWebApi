@@ -1,5 +1,4 @@
-﻿using CrmWebApi.Domain.DatabaseContext;
-using CrmWebApi.DTO;
+﻿using CrmWebApi.Domain.Core;
 using CrmWebApi.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +18,7 @@ namespace CrmWebApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ProductDto> Get()
+        public IEnumerable<Product> Get()
         {
             return _productRepository.GetAll();
         }

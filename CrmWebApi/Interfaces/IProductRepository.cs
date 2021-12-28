@@ -1,11 +1,11 @@
-﻿using CrmWebApi.DTO;
+﻿using CrmWebApi.Domain.Core;
 using System.Collections.Generic;
 
 namespace CrmWebApi.Interfaces
 {
     public interface IProductRepository
     {
-        IEnumerable<ProductDto> GetAll();
+        IEnumerable<Product> GetAll();
         string GetTheMostFrequentCategoryName();
     }
 }
