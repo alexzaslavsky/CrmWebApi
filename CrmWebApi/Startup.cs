@@ -1,4 +1,6 @@
 using CrmWebApi.Domain.DatabaseContext;
+using CrmWebApi.Interfaces;
+using CrmWebApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +14,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CrmWebApi
@@ -30,7 +33,8 @@ namespace CrmWebApi
         {
             string connection = Configuration.GetConnectionString(Constants.ConnectionStringKey);
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(json => json.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CrmWebApi", Version = "v1" });

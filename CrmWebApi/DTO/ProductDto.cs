@@ -1,6 +1,6 @@
-﻿namespace CrmWebApi.Domain.Core
+﻿namespace CrmWebApi.DTO
 {
-    public class Product
+    public class ProductDto
     {
         public int Id { get; set; }
 
@@ -13,7 +13,5 @@
         public bool IsAvailable { get; set; }
 
         public int? CategoryId { get; set; }
-
-        public virtual ProductCategory Category { get; set; }
     }
 }
