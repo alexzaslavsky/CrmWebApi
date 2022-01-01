@@ -22,9 +22,9 @@ namespace CrmWebApi.Repositories
 
         public string GetTheMostFrequentCategoryName()
         {
-            return _databaseContext.Products.ToList()
-                .GroupBy(product => product.Category.Id)
-                .Select(group => new {CategoryName = group.FirstOrDefault()?.Category.Name, Count = group.Count()})
+            return _databaseContext.Products
+                .GroupBy(product => product.Category.Name)
+                .Select(group => new {CategoryName = group.Key, Count = group.Count()})
                 .OrderByDescending(item => item.Count)
                 .FirstOrDefault()?.CategoryName;
         }

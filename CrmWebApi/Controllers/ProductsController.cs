@@ -1,8 +1,10 @@
 ﻿using CrmWebApi.Domain.Core;
 using CrmWebApi.Interfaces;
+using CrmWebApi.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CrmWebApi.Controllers
 {
@@ -18,9 +20,18 @@ namespace CrmWebApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public IEnumerable<ProductViewModel> Get()
         {
-            return _productRepository.GetAll();
+            var products = _productRepository.GetAll();
+            return products.Select(p => new ProductViewModel()
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                IsAvailable = p.IsAvailable,
+                CategoryId = p.CategoryId,
+                Description = p.Description
+            }).ToList();
         }
 
         [HttpGet]

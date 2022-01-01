@@ -1,15 +1,14 @@
 ﻿using CrmWebApi.Domain.Core;
 using CrmWebApi.Domain.DatabaseContext.Configurations;
-using CrmWebApi.Domain.DatabaseContext.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CrmWebApi.Domain.DatabaseContext
 {
     public class DatabaseContext : DbContext
     {
-        public DbSet<Product> Products { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
 
-        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
