@@ -6,7 +6,6 @@ using EntityFrameworkCore.Testing.NSubstitute;
 using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CrmWebApi.Tests.Repositories
@@ -42,7 +41,7 @@ namespace CrmWebApi.Tests.Repositories
         [Test]
         public void GetAll_Returns_Eight_Products_When_Eight_Products_Exist_In_Database()
         {
-            var names = new List<string>()
+            var names = new string[]
             {
                 "IPhone 13 Pro",
                 "Samsung Galaxy A12",
@@ -81,7 +80,7 @@ namespace CrmWebApi.Tests.Repositories
 
             _databaseContext
                 .Set<Product>()
-                .AddRange(new List<Product>()
+                .AddRange(new Product[]
                 {
                     new Product { Id = 2, Name = "IPhone 13 Pro", Price = 39000, CategoryId = 1, Category = smartphone },
                     new Product { Id = 3, Name = "Samsung Galaxy A12", Price = 5500, CategoryId = 1, Category = smartphone },
