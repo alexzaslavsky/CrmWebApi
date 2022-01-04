@@ -4,14 +4,16 @@ using CrmWebApi.Domain.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CrmWebApi.Domain.DatabaseContext.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20211225171641_ProductCategoryChangedTableName")]
+    partial class ProductCategoryChangedTableName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -90,30 +92,6 @@ namespace CrmWebApi.Domain.DatabaseContext.Migrations
                             IsAvailable = true,
                             Name = "Oppo A74",
                             Price = 8900m
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CategoryId = 2,
-                            IsAvailable = true,
-                            Name = "HP EliteBook",
-                            Price = 45000m
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CategoryId = 2,
-                            IsAvailable = true,
-                            Name = "ASUS ZenBook",
-                            Price = 35000m
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CategoryId = 3,
-                            IsAvailable = true,
-                            Name = "Samsung QE55Q60AAUXUA",
-                            Price = 36000m
                         });
                 });
 
@@ -125,7 +103,9 @@ namespace CrmWebApi.Domain.DatabaseContext.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.HasKey("Id");
 

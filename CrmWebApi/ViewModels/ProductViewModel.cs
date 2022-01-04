@@ -1,6 +1,6 @@
-﻿namespace CrmWebApi.Domain.Core
+﻿namespace CrmWebApi.ViewModels
 {
-    public class Product
+    public class ProductViewModel
     {
         public int Id { get; set; }
 
@@ -14,6 +14,5 @@
 
         public int? CategoryId { get; set; }
 
-        public virtual ProductCategory Category { get; set; }
     }
 }

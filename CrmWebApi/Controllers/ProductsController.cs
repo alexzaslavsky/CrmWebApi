@@ -1,5 +1,6 @@
 ﻿using CrmWebApi.Domain.Core;
-using CrmWebApi.Domain.DatabaseContext;
+using CrmWebApi.Interfaces;
+using CrmWebApi.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -11,17 +12,33 @@ namespace CrmWebApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly DatabaseContext _databaseContext;
+        private readonly IProductRepository _productRepository;
 
-        public ProductsController(DatabaseContext databaseContext)
+        public ProductsController(IProductRepository productRepository)
         {
-            _databaseContext = databaseContext;
+            this._productRepository = productRepository;
         }
 
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public IEnumerable<ProductViewModel> Get()
         {
-            return _databaseContext.Products.ToList();
+            var products = _productRepository.GetAll();
+            return products.Select(p => new ProductViewModel()
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                IsAvailable = p.IsAvailable,
+                CategoryId = p.CategoryId,
+                Description = p.Description
+            }).ToList();
+        }
+
+        [HttpGet]
+        [Route("/MostFrequentCategory")]
+        public string GetTheMostFrequentCategoryName()
+        {
+            return _productRepository.GetTheMostFrequentCategoryName();
         }
     }
 }
