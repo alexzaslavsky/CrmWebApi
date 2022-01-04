@@ -8,13 +8,8 @@ namespace CrmWebApi.Domain.DatabaseContext.Configurations
     {
         public void Configure(EntityTypeBuilder<ProductCategory> builder)
         {
-            builder.HasData(
-                new ProductCategory[]
-                {
-                    new ProductCategory { Id = 1, Name = "Smartphone" },
-                    new ProductCategory { Id = 2, Name = "Laptop" },
-                    new ProductCategory { Id = 3, Name = "TV"}
-                });
+            ConfigureProperties(builder);
+            Seed(builder);
         }
 
         protected virtual void ConfigureProperties(EntityTypeBuilder<ProductCategory> builder)

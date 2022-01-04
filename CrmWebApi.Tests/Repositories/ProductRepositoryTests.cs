@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CrmWebApi.Tests
+namespace CrmWebApi.Tests.Repositories
 {
     public class ProductRepositoryTests
     {
@@ -32,7 +32,7 @@ namespace CrmWebApi.Tests
         }
 
         [Test]
-        public void Returns_Eight_Products()
+        public void GetAll_Returns_Count_Eight_When_Eight_Products_Exist_In_Database()
         {
             var result = _sut.GetAll().Count();
 
@@ -40,7 +40,7 @@ namespace CrmWebApi.Tests
         }
 
         [Test]
-        public void Returns_Phones_Laptops_TVs()
+        public void GetAll_Returns_Eight_Products_When_Eight_Products_Exist_In_Database()
         {
             var names = new List<string>()
             {
@@ -62,7 +62,7 @@ namespace CrmWebApi.Tests
         }
 
         [Test]
-        public void Returns_Smartphone_Category()
+        public void GetTheMostFrequentCategoryName_Returns_Smartphone_Category()
         {
             var result = _sut.GetTheMostFrequentCategoryName();
 
@@ -77,7 +77,7 @@ namespace CrmWebApi.Tests
 
             _databaseContext
                 .Set<ProductCategory>()
-                .AddRange(new List<ProductCategory> { smartphone, laptop, tv });
+                .AddRange(new ProductCategory[] { smartphone, laptop, tv });
 
             _databaseContext
                 .Set<Product>()
