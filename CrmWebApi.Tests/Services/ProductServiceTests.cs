@@ -4,7 +4,7 @@ using CrmWebApi.Domain.Core;
 using CrmWebApi.Interfaces;
 using CrmWebApi.Services;
 using CrmWebApi.ViewModels;
-using Moq;
+using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -15,33 +15,30 @@ namespace CrmWebApi.Tests.Services
     internal class ProductServiceTests
     {
         IProductService sut;
-
         IProductRepository productRepository;
-
         IMapper mapper;
 
         [SetUp]
         public void Setup()
         {
-            var productRepositoryMock = new Mock<IProductRepository>();
-            productRepositoryMock.Setup(repo => repo.GetAll()).Returns(GetAllProducts());
-            productRepository = productRepositoryMock.Object;
+            productRepository = Substitute.For<IProductRepository>();
+            productRepository.GetAll().Returns(GetAllProducts());
 
             var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile(new ProductMapperProfile()));
             mapper = mapperConfig.CreateMapper();
         }
 
         [Test]
-        public void GetAll_Returns_Eight_Products()
+        public void GetAll_Calls_Repo_GetAll()
         {
             //Arrange
             sut = new ProductService(productRepository, mapper);
 
             //Act
-            var result = sut.GetAll().Count();
+            sut.GetAll();
 
             //Assert
-            Assert.AreEqual(8, result);
+            productRepository.Received(1).GetAll();
         }
 
         [Test]
@@ -51,31 +48,35 @@ namespace CrmWebApi.Tests.Services
             sut = new ProductService(productRepository, mapper);
 
             //Act
-            var result = sut.GetAll() is IEnumerable<ProductViewModel>;
+            var result = sut.GetAll();
 
             //Assert
-            Assert.That(result, Is.True);
+            Assert.That(result is IEnumerable<ProductViewModel>, Is.True);
         }
 
         [Test]
-        public void Service_Throws_ArgumentNullException_When_Repo_Is_Null()
+        public void Ctor_Throws_ArgumentNullException_When_Repo_Is_Null()
         {
-            Assert.That(() =>
+            var ex = Assert.Throws<ArgumentNullException>(() =>
             {
                 sut = new ProductService(null, mapper);
-            }, Throws.InstanceOf<ArgumentNullException>());
+            });
+
+            Assert.That(ex.ParamName, Is.EqualTo("productRepository"));
         }
 
         [Test]
-        public void Service_Throws_ArgumentNullException_When_Mapper_Is_Null()
+        public void Ctor_Throws_ArgumentNullException_When_Mapper_Is_Null()
         {
-            Assert.That(() =>
+            var ex = Assert.Throws<ArgumentNullException>(() =>
             {
                 sut = new ProductService(productRepository, null);
-            }, Throws.InstanceOf<ArgumentNullException>());
+            });
+
+            Assert.That(ex.ParamName, Is.EqualTo("mapper"));
         }
 
-        private IEnumerable<Product> GetAllProducts()
+        private static IEnumerable<Product> GetAllProducts()
         {
             var smartphone = new ProductCategory() { Id = 1, Name = "Smartphone" };
             var laptop = new ProductCategory() { Id = 2, Name = "Laptop" };

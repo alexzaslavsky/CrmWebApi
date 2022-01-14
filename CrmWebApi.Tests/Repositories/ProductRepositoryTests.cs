@@ -68,6 +68,17 @@ namespace CrmWebApi.Tests.Repositories
             Assert.That(result, Is.EqualTo("Smartphone"));
         }
 
+        [Test]
+        public void Ctor_Throws_ArgumentNullException_When_Context_Is_Null()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() =>
+            {
+                _sut = new ProductRepository(null);
+            });
+
+            Assert.That(ex.ParamName, Is.EqualTo("databaseContext"));
+        }
+
         private void FillDbSets()
         {
             var smartphone = new ProductCategory() { Id = 1, Name = "Smartphone" };

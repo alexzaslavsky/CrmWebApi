@@ -3,6 +3,7 @@ using CrmWebApi.Interfaces;
 using CrmWebApi.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace CrmWebApi.Services
 {
@@ -13,8 +14,16 @@ namespace CrmWebApi.Services
 
         public ProductService(IProductRepository productRepository, IMapper mapper)
         {
-            _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            try
+            {
+                _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
+                _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+                throw;
+            }
         }
 
         public IEnumerable<ProductViewModel> GetAll()

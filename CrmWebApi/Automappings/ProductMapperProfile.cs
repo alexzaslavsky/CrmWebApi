@@ -8,7 +8,7 @@ namespace CrmWebApi.Automappings
     {
         public ProductMapperProfile()
         {
-            CreateMap<ProductViewModel, Product>().ReverseMap();
+            CreateMap<Product, ProductViewModel>();
         }
     }
 }

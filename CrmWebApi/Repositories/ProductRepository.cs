@@ -1,7 +1,9 @@
 ﻿using CrmWebApi.Domain.Core;
 using CrmWebApi.Domain.DatabaseContext;
 using CrmWebApi.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace CrmWebApi.Repositories
@@ -12,7 +14,15 @@ namespace CrmWebApi.Repositories
 
         public ProductRepository(DatabaseContext databaseContext)
         {
-            _databaseContext = databaseContext;
+            try
+            {
+                _databaseContext = databaseContext ?? throw new ArgumentNullException(nameof(databaseContext));
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+                throw;
+            }
         }
 
         public IEnumerable<Product> GetAll()
