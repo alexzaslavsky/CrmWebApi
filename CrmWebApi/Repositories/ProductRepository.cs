@@ -21,33 +21,16 @@ namespace CrmWebApi.Repositories
 
         public IEnumerable<Product> GetAll()
         {
-            try
-            {
-                return _databaseContext.Products.ToList();
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine(ex.Message);
-                return Enumerable.Empty<Product>();
-            }
+            return _databaseContext.Products.ToList();
         }
 
         public string GetTheMostFrequentCategoryName()
         {
-            try
-            {
-                return _databaseContext.Products
-                    .GroupBy(product => product.Category.Name)
-                    .Select(group => new {CategoryName = group.Key, Count = group.Count()})
-                    .OrderByDescending(item => item.Count)
-                    .FirstOrDefault()?.CategoryName;
-
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine(ex.Message);
-                return string.Empty;
-            }
+            return _databaseContext.Products
+                .GroupBy(product => product.Category.Name)
+                .Select(group => new {CategoryName = group.Key, Count = group.Count()})
+                .OrderByDescending(item => item.Count)
+                .FirstOrDefault()?.CategoryName;
         }
     }
 }
