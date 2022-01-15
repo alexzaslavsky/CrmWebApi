@@ -1,5 +1,6 @@
 ﻿using CrmWebApi.Domain.Core;
 using CrmWebApi.Domain.DatabaseContext;
+using CrmWebApi.Helpers;
 using CrmWebApi.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,29 +15,39 @@ namespace CrmWebApi.Repositories
 
         public ProductRepository(DatabaseContext databaseContext)
         {
-            try
-            {
-                _databaseContext = databaseContext ?? throw new ArgumentNullException(nameof(databaseContext));
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine(ex.Message);
-                throw;
-            }
+            GuardClauses.IsNotNull(databaseContext, nameof(databaseContext));
+            _databaseContext = databaseContext ?? throw new ArgumentNullException(nameof(databaseContext));
         }
 
         public IEnumerable<Product> GetAll()
         {
-            return _databaseContext.Products.ToList();
+            try
+            {
+                return _databaseContext.Products.ToList();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+                return Enumerable.Empty<Product>();
+            }
         }
 
         public string GetTheMostFrequentCategoryName()
         {
-            return _databaseContext.Products
-                .GroupBy(product => product.Category.Name)
-                .Select(group => new {CategoryName = group.Key, Count = group.Count()})
-                .OrderByDescending(item => item.Count)
-                .FirstOrDefault()?.CategoryName;
+            try
+            {
+                return _databaseContext.Products
+                    .GroupBy(product => product.Category.Name)
+                    .Select(group => new {CategoryName = group.Key, Count = group.Count()})
+                    .OrderByDescending(item => item.Count)
+                    .FirstOrDefault()?.CategoryName;
+
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+                return string.Empty;
+            }
         }
     }
 }

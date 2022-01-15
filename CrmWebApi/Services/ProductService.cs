@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using CrmWebApi.Helpers;
 using CrmWebApi.Interfaces;
 using CrmWebApi.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace CrmWebApi.Services
 {
@@ -14,27 +16,38 @@ namespace CrmWebApi.Services
 
         public ProductService(IProductRepository productRepository, IMapper mapper)
         {
-            try
-            {
-                _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
-                _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            }
-            catch (Exception ex)
-            {
-                Trace.WriteLine(ex.Message);
-                throw;
-            }
+            GuardClauses.IsNotNull(productRepository, nameof(productRepository));
+            GuardClauses.IsNotNull(mapper, nameof(mapper));
+            _productRepository = productRepository;
+            _mapper = mapper;
         }
 
         public IEnumerable<ProductViewModel> GetAll()
         {
-            var products = _productRepository.GetAll();
-            return _mapper.Map<IEnumerable<ProductViewModel>>(products);
+            try
+            {
+                var products = _productRepository.GetAll();
+                return _mapper.Map<IEnumerable<ProductViewModel>>(products);
+
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+                return Enumerable.Empty<ProductViewModel>();
+            }
         }
 
         public string GetTheMostFrequentCategoryName()
         {
-            return _productRepository.GetTheMostFrequentCategoryName();
+            try
+            {
+                return _productRepository.GetTheMostFrequentCategoryName();
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex.Message);
+                return string.Empty;
+            }
         }
     }
 }

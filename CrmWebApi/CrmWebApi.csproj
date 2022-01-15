@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CrmWebApi.Domain.DatabaseContext\CrmWebApi.Domain.DatabaseContext.csproj" />
+    <ProjectReference Include="..\CrmWebApi.Helpers\CrmWebApi.Helpers.csproj" />
   </ItemGroup>
 
 </Project>
