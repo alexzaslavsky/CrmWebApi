@@ -1,7 +1,10 @@
 ﻿using CrmWebApi.Domain.Core;
 using CrmWebApi.Domain.DatabaseContext;
+using CrmWebApi.Helpers;
 using CrmWebApi.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace CrmWebApi.Repositories
@@ -12,6 +15,7 @@ namespace CrmWebApi.Repositories
 
         public ProductRepository(DatabaseContext databaseContext)
         {
+            GuardClauses.IsNotNull(databaseContext, nameof(databaseContext));
             _databaseContext = databaseContext;
         }
 

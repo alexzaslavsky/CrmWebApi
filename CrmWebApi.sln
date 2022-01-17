@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrmWebApi.Domain.Core", "Cr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrmWebApi.Domain.DatabaseContext", "CrmWebApi.Domain.DatabaseContext\CrmWebApi.Domain.DatabaseContext.csproj", "{4CCBEFE5-44F9-4810-8287-78CFA541209D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrmWebApi.Tests", "CrmWebApi.Tests\CrmWebApi.Tests.csproj", "{3B250956-FF7A-4D4A-B7E1-131079CF6FD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrmWebApi.Tests", "CrmWebApi.Tests\CrmWebApi.Tests.csproj", "{3B250956-FF7A-4D4A-B7E1-131079CF6FD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrmWebApi.Helpers", "CrmWebApi.Helpers\CrmWebApi.Helpers.csproj", "{3E1B81DF-447B-4989-A908-447D40080825}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{3B250956-FF7A-4D4A-B7E1-131079CF6FD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B250956-FF7A-4D4A-B7E1-131079CF6FD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B250956-FF7A-4D4A-B7E1-131079CF6FD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E1B81DF-447B-4989-A908-447D40080825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E1B81DF-447B-4989-A908-447D40080825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E1B81DF-447B-4989-A908-447D40080825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E1B81DF-447B-4989-A908-447D40080825}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

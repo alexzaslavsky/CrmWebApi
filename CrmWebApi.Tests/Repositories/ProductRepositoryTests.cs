@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace CrmWebApi.Tests.Repositories
 {
+    [TestFixture]
     public class ProductRepositoryTests
     {
         DatabaseContext _databaseContext;
@@ -66,6 +67,17 @@ namespace CrmWebApi.Tests.Repositories
             var result = _sut.GetTheMostFrequentCategoryName();
 
             Assert.That(result, Is.EqualTo("Smartphone"));
+        }
+
+        [Test]
+        public void Ctor_Throws_ArgumentNullException_When_Context_Is_Null()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() =>
+            {
+                _sut = new ProductRepository(null);
+            });
+
+            Assert.That(ex.ParamName, Is.EqualTo("databaseContext"));
         }
 
         private void FillDbSets()
