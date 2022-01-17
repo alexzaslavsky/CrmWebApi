@@ -15,9 +15,9 @@ namespace CrmWebApi.Tests.Services
     [TestFixture]
     public class ProductServiceTests
     {
-        IProductService sut;
         IProductRepository productRepository;
         IMapper mapper;
+        IProductService sut;
 
         [SetUp]
         public void Setup()
