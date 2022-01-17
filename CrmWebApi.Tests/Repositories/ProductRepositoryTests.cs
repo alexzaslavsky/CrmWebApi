@@ -10,6 +10,7 @@ using System.Linq;
 
 namespace CrmWebApi.Tests.Repositories
 {
+    [TestFixture]
     public class ProductRepositoryTests
     {
         DatabaseContext _databaseContext;

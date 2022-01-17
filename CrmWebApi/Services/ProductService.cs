@@ -28,7 +28,6 @@ namespace CrmWebApi.Services
             {
                 var products = _productRepository.GetAll();
                 return _mapper.Map<IEnumerable<ProductViewModel>>(products);
-
             }
             catch (Exception ex)
             {

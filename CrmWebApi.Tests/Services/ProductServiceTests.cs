@@ -12,7 +12,8 @@ using System.Linq;
 
 namespace CrmWebApi.Tests.Services
 {
-    internal class ProductServiceTests
+    [TestFixture]
+    public class ProductServiceTests
     {
         IProductService sut;
         IProductRepository productRepository;

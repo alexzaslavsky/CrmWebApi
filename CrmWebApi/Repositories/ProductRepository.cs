@@ -16,7 +16,7 @@ namespace CrmWebApi.Repositories
         public ProductRepository(DatabaseContext databaseContext)
         {
             GuardClauses.IsNotNull(databaseContext, nameof(databaseContext));
-            _databaseContext = databaseContext ?? throw new ArgumentNullException(nameof(databaseContext));
+            _databaseContext = databaseContext;
         }
 
         public IEnumerable<Product> GetAll()
