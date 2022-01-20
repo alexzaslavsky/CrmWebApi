@@ -12,42 +12,37 @@ namespace CrmWebApi.Services
 {
     public class ProductCategoryService : IProductCategoryService
     {
-        private readonly IProductCategoryRepository productCategoryRepository;
-        private readonly IMapper mapper;
+        private readonly IProductCategoryRepository _productCategoryRepository;
+        private readonly IMapper _mapper;
 
         public ProductCategoryService(IProductCategoryRepository productCategoryRepository, IMapper mapper)
         {
             GuardClauses.IsNotNull(productCategoryRepository, nameof(productCategoryRepository));
             GuardClauses.IsNotNull(mapper, nameof(mapper));
-            this.productCategoryRepository = productCategoryRepository;
-            this.mapper = mapper;
+            _productCategoryRepository = productCategoryRepository;
+            _mapper = mapper;
         }
 
-        public Dictionary<string, int> GetAll()
+        public IEnumerable<ProductCategoryViewModel> GetAll()
         {
             try
             {
-                return productCategoryRepository
-                    .GetAll()
-                    .Select(c => new { 
-                        CategoryName =  c.Name,
-                        TotalProducts = c.Products.Count
-                    })
-                    .ToDictionary(item => item.CategoryName, item => item.TotalProducts);
+                var categories = _productCategoryRepository.GetAll();
+                return _mapper.Map<IEnumerable<ProductCategoryViewModel>>(categories);
             }
             catch (Exception ex)
             {
                 Trace.WriteLine(ex.Message);
-                return new Dictionary<string, int>();
+                return Enumerable.Empty<ProductCategoryViewModel>();
             }
         }
 
-        public int CreateProductCategory(ProductCategoryViewModel productCategoryViewModel)
+        public int CreateProductCategory(CreationProductCategoryViewModel productCategoryViewModel)
         {
             try
             {
-                var productCategory = mapper.Map<ProductCategory>(productCategoryViewModel);
-                return productCategoryRepository.CreateProductCategory(productCategory);
+                var productCategory = _mapper.Map<ProductCategory>(productCategoryViewModel);
+                return _productCategoryRepository.CreateProductCategory(productCategory);
             }
             catch (Exception ex)
             {

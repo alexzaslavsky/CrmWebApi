@@ -8,7 +8,9 @@ namespace CrmWebApi.Automappings
     {
         public ProductCategoryMapperProfile()
         {
-            CreateMap<ProductCategory, ProductCategoryViewModel>().ReverseMap();
+            CreateMap<ProductCategory, ProductCategoryViewModel>();
+
+            CreateMap<CreationProductCategoryViewModel, ProductCategory>();
         }
     }
 }

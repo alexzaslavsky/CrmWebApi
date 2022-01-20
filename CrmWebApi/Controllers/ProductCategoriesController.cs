@@ -9,28 +9,27 @@ namespace CrmWebApi.Controllers
     [ApiController]
     public class ProductCategoriesController : Controller
     {
-        private readonly IProductCategoryService productCategoryService;
+        private readonly IProductCategoryService _productCategoryService;
 
         public ProductCategoriesController(IProductCategoryService productCategoryService)
         {
-            this.productCategoryService = productCategoryService;
+            _productCategoryService = productCategoryService;
         }
 
         [HttpGet]
-        public Dictionary<string, int> GetAll()
+        public IEnumerable<ProductCategoryViewModel> GetAll()
         {
-            return productCategoryService.GetAll();
+            return _productCategoryService.GetAll();
         }
 
         [HttpPost("CreateProductCategory")]
-        public ActionResult<ProductCategoryViewModel> CreateProductCategory(ProductCategoryViewModel category)
+        public ActionResult CreateProductCategory(CreationProductCategoryViewModel category)
         {
-            if (productCategoryService.CreateProductCategory(category) == 1)
+            if (_productCategoryService.CreateProductCategory(category) == 1)
             {
-                return Ok(category);
+                return Ok();
             }
             return BadRequest();
-            
         }
     }
 }

@@ -5,7 +5,7 @@ namespace CrmWebApi.Services
 {
     public interface IProductCategoryService
     {
-        Dictionary<string, int> GetAll();
-        int CreateProductCategory(ProductCategoryViewModel category);
+        IEnumerable<ProductCategoryViewModel> GetAll();
+        int CreateProductCategory(CreationProductCategoryViewModel category);
     }
 }

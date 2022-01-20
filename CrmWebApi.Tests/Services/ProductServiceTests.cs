@@ -15,41 +15,41 @@ namespace CrmWebApi.Tests.Services
     [TestFixture]
     public class ProductServiceTests
     {
-        IProductRepository productRepository;
-        IMapper mapper;
-        IProductService sut;
+        IProductRepository _productRepository;
+        IMapper _mapper;
+        IProductService _sut;
 
         [SetUp]
         public void Setup()
         {
-            productRepository = Substitute.For<IProductRepository>();
-            productRepository.GetAll().Returns(Enumerable.Empty<Product>());
+            _productRepository = Substitute.For<IProductRepository>();
+            _productRepository.GetAll().Returns(Enumerable.Empty<Product>());
 
             var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile(new ProductMapperProfile()));
-            mapper = mapperConfig.CreateMapper();
+            _mapper = mapperConfig.CreateMapper();
         }
 
         [Test]
         public void GetAll_Calls_Repo_GetAll()
         {
             //Arrange
-            sut = new ProductService(productRepository, mapper);
+            _sut = new ProductService(_productRepository, _mapper);
 
             //Act
-            sut.GetAll();
+            _sut.GetAll();
 
             //Assert
-            productRepository.Received(1).GetAll();
+            _productRepository.Received(1).GetAll();
         }
 
         [Test]
         public void GetAll_Returns_IEnumerable_Of_ProductViewModel()
         {
             //Arrange
-            sut = new ProductService(productRepository, mapper);
+            _sut = new ProductService(_productRepository, _mapper);
 
             //Act
-            var result = sut.GetAll();
+            var result = _sut.GetAll();
 
             //Assert
             Assert.That(result is IEnumerable<ProductViewModel>, Is.True);
@@ -60,7 +60,7 @@ namespace CrmWebApi.Tests.Services
         {
             var ex = Assert.Throws<ArgumentNullException>(() =>
             {
-                sut = new ProductService(null, mapper);
+                _sut = new ProductService(null, _mapper);
             });
 
             Assert.That(ex.ParamName, Is.EqualTo("productRepository"));
@@ -71,7 +71,7 @@ namespace CrmWebApi.Tests.Services
         {
             var ex = Assert.Throws<ArgumentNullException>(() =>
             {
-                sut = new ProductService(productRepository, null);
+                _sut = new ProductService(_productRepository, null);
             });
 
             Assert.That(ex.ParamName, Is.EqualTo("mapper"));
